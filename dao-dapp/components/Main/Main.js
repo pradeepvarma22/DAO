@@ -1,10 +1,9 @@
+import { BigNumber, ethers } from "ethers";
+import { useEffect, useReducer, useState } from "react"
+
 import daoContract from "../../utility/contract/dao/index"
 import myContract from "../../utility/contract/token/index"
-import { useEffect, useReducer, useState } from "react"
-import { daoContractReducer, DAO_INITIAL_STATE, DAO_OPTIONS } from "../../utility/reducer/contract/dao/index"
-import { ethers, BigNumber } from "ethers";
-
-
+import { DAO_INITIAL_STATE, DAO_OPTIONS, daoContractReducer } from "../../utility/reducer/contract/dao/index"
 
 export default function Connected({ walletState, walletDispatch }) {
 
@@ -104,13 +103,13 @@ export default function Connected({ walletState, walletDispatch }) {
                         <div className="container ml-auto mr-auto flex flex-wrap gap-10 items-start">
 
 
-                            {allProposals.map(function (d, idx) {
+                            {allProposals.map(function (d) {
 
                                 return (
 
 
 
-                                    <div>
+                                    <div key={d.id}>
 
                                         <div className="px-4 py-3 w-max bg-white shadow-md rounded-xl duration-500 hover:scale-105  hover:shadow-xl">
 
@@ -119,7 +118,7 @@ export default function Connected({ walletState, walletDispatch }) {
                                                 alt="Product"
                                                 className="h-80 w-72 object-cover rounded-t-xl"
                                             />
-                                            <div key={idx} className="px-4 py-3 w-72">
+                                            <div className="px-4 py-3 w-72">
                                                 <span className="text-gray-400 mr-3 text-xs">{d.author}</span>
                                                 <p className="text-lg font-semibold text-black truncate">{d.text}</p>
                                                 <div className="flex items-center">
@@ -130,7 +129,7 @@ export default function Connected({ walletState, walletDispatch }) {
                                                     <button className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-2 py-1 text-center mr-2 mb-2" onClick={() => setVote(d.hash, 0)}>UpVote</button>{"   "}
                                                     <button className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-2 py-1 text-center mr-2 mb-2" onClick={() => setVote(d.hash, 1)}>DownVote</button>
                                                 </p>
-                                                <p>{d.createdAt.toString()}</p>
+                                                <p >{d.createdAt.toString()}</p>
 
                                             </div>
 
