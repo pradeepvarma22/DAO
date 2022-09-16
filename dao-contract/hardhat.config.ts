@@ -9,7 +9,7 @@ const METAMASK_PRIVATE_KEY: string = process.env.METAMASK_PRIVATE_KEY!;
 
 const config: HardhatUserConfig = {
   networks: {
-    rinkeby: {
+    polygontest: {
       url: ALCHEMY_API_KEY_URL,
       accounts: [METAMASK_PRIVATE_KEY]
     }
