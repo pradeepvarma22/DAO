@@ -28,6 +28,10 @@ contract DAO is Ownable {
 
     // proposalHashName to Proposal Struct data type
     mapping(bytes32 => Proposal) public proposals;
+
+    bytes32[] public proposalhashlist;
+
+    uint256 public noofproposals;
     
     // who voter for who investor-> proposalHashName-> boolean
     mapping(address =>  mapping(bytes32 => bool)) public votes;
@@ -73,7 +77,8 @@ contract DAO is Ownable {
     {
         require(shares[msg.sender] >= CREATE_PROPOSAL_MIN_SHARE , "not enough shares to create ");
         require(proposals[proposalhash].proposalnamehash != bytes32(0),"Proposal Already Exits");
-
+        proposalhashlist.push(proposalhash);
+        noofproposals +=1;
         proposals[proposalhash] = Proposal(msg.sender, proposalhash, block.timestamp, 0, 0, Status.UNDECIDED  );
 
     }
@@ -112,9 +117,6 @@ contract DAO is Ownable {
             }
 
         }
-
-
-
 
     }
 
