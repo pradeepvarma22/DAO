@@ -21,11 +21,9 @@ npx hardhat run scripts/deploy.ts
 
 # Deployed At
 ```
-C:\Pradeepvarma_22\Projects\dao\dao-contract>yarn hardhat run scripts/deploy.ts --network polygontest
-yarn run v1.22.19
 $ C:\Pradeepvarma_22\Projects\dao\dao-contract\node_modules\.bin\hardhat run scripts/deploy.ts --network polygontest
 Compiled 1 Solidity file successfully
-Token Contract is at address 0xE7AaD05D9D365e32a76df717Df3902d184FD0AF2
-DAO Contract is at address 0x623B40bC298A94ff6596ADa2B0d9073b09e6eD85
-Done in 36.49s.
+Token Contract is at address 0xa9E8dde0109F31504CfA37994D13f6189e5D9ad5
+DAO Contract is at address 0xFe8E2e3E07224170eB9E0CEfa1da2c4C5D63d50C
+Done in 25.39s.
 ```

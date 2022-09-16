@@ -54,15 +54,16 @@ export default function Header() {
                                     </a>
                                 </li>
                                 <li className="md:ml-4">
+                                    <a className="border-t block no-underline hover:underline py-2 text-grey-darkest hover:text-black md:border-none md:p-0" href="/addproposal">
+                                        Add Proposal
+                                    </a>
+                                </li>
+                                <li className="md:ml-4">
                                     <a className="border-t block no-underline hover:underline py-2 text-grey-darkest hover:text-black md:border-none md:p-0" href="/token">
                                         Token
                                     </a>
                                 </li>
-                                <li className="md:ml-4">
-                                    <a className="border-t block no-underline hover:underline py-2 text-grey-darkest hover:text-black md:border-none md:p-0" href="">
-                                        About
-                                    </a>
-                                </li>
+
                             </ul>
                         </nav>
 

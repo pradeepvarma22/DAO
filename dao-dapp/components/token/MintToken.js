@@ -17,15 +17,15 @@ export default function MintToken({ walletState, walletDispatch, web3ModalRef })
         const userAddress = await signer.getAddress()
         const contract = await myContract(signer);
 
-        console.log(tokenContractState.tokenAmount, 'xxxx');
+
 
         const noOfTokens = tokenContractState.tokenAmount;
         const _value = noOfTokens * 0.01;
-        console.log(_value);
+
 
         const txn = await contract.mint(ethers.utils.parseEther(noOfTokens), { value: ethers.utils.parseEther(_value.toString()) })
         await txn.wait();
-        console.log(txn);
+
         await getBalanceOf();
     }
 

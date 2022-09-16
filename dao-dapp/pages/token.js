@@ -40,7 +40,7 @@ export default function Token() {
                         </div>
 
                     ) : (
-                        <div>
+                        <div className="grid place-items-center h-screen">
 
                             <ConnectToWallet walletState={walletState} walletDispatch={walletDispatch} web3ModalRef={web3ModalRef} />
 

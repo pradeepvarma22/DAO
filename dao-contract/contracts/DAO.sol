@@ -76,7 +76,7 @@ contract DAO is Ownable {
     function createProposal(bytes32 proposalhash) external
     {
         require(shares[msg.sender] >= CREATE_PROPOSAL_MIN_SHARE , "not enough shares to create ");
-        require(proposals[proposalhash].proposalnamehash != bytes32(0),"Proposal Already Exits");
+        require(proposals[proposalhash].proposalnamehash == bytes32(0),"Proposal Already Exits");
         proposalhashlist.push(proposalhash);
         noofproposals +=1;
         proposals[proposalhash] = Proposal(msg.sender, proposalhash, block.timestamp, 0, 0, Status.UNDECIDED  );
