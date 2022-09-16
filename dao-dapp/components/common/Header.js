@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link';
 
 
 
@@ -49,19 +50,27 @@ export default function Header() {
                         <nav>
                             <ul className="list-reset md:flex md:items-center">
                                 <li className="md:ml-4">
-                                    <a className="block no-underline hover:underline py-2 text-grey-darkest hover:text-black md:border-none md:p-0" href="/">
+                                    {/* <a className="block no-underline hover:underline py-2 text-grey-darkest hover:text-black md:border-none md:p-0" href="/"> */}
+                                    <Link href="/">
                                         DAO
-                                    </a>
+                                    </Link>
+
+                                    {/* </a> */}
                                 </li>
                                 <li className="md:ml-4">
-                                    <a className="border-t block no-underline hover:underline py-2 text-grey-darkest hover:text-black md:border-none md:p-0" href="/addproposal">
+                                    <Link href="/addproposal">
+
+
                                         Add Proposal
-                                    </a>
+
+                                    </Link>
                                 </li>
                                 <li className="md:ml-4">
-                                    <a className="border-t block no-underline hover:underline py-2 text-grey-darkest hover:text-black md:border-none md:p-0" href="/token">
+                                    {/* <a className="border-t block no-underline hover:underline py-2 text-grey-darkest hover:text-black md:border-none md:p-0" href="/token"> */}
+                                    <Link href="/token">
                                         Token
-                                    </a>
+                                    </Link>
+                                    {/* </a> */}
                                 </li>
 
                             </ul>
