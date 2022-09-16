@@ -6,7 +6,7 @@ each Proposal created has a deadline for voting and after all the deadline
 decision is made in favour of the voting outcome.
 </p>
 <br/>
-<br/>
+
 ## Installation
 
 ```bash
