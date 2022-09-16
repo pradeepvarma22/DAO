@@ -1,12 +1,9 @@
 import { ethers } from "ethers";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+
+import { DAO_CONTRACT_ADDRESS } from "../../utility/constants/contract/dao/index"
 import daoContract from "../../utility/contract/dao/index"
 import myContract from "../../utility/contract/token/index"
-import { DAO_CONTRACT_ADDRESS } from "../../utility/constants/contract/dao/index"
-
-
-
-
 
 export default function AddProposals({ walletState, walletDispatch }) {
     const inputEl = useRef(null);
@@ -100,7 +97,7 @@ export default function AddProposals({ walletState, walletDispatch }) {
 
                                                             <form className="w-full max-w-sm">
                                                                 <div className="flex items-center border-b border-teal-500 py-2">
-                                                                    <input ref={inputEl} onChange={setProposalText} placeholder="No of tokens" type="text" className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" aria-label="No Of Tokens" />
+                                                                    <input ref={inputEl} onChange={setProposalText} placeholder="Proposal" type="text" className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" aria-label="Proposal" />
                                                                     <button onClick={txnAddProposal} className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded" type="button">
                                                                         ADD
                                                                     </button>
