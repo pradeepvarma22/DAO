@@ -79,13 +79,13 @@ export default function Connected({ walletState, walletDispatch }) {
     return (
         <div>
             <div>
-
-
-
-                {walletState.walletAddress}<br />
-                {ethers.utils.formatEther(daoContractState.tokenBalance)}
                 <br />
-
+                <center>
+                    <div>
+                        <p className="hover:shadow-md">{walletState.walletAddress}</p>
+                        Shares: {ethers.utils.formatEther(daoContractState.tokenBalance)}
+                    </div>
+                </center>
 
 
 
@@ -98,43 +98,63 @@ export default function Connected({ walletState, walletDispatch }) {
 
 
                 <div>
-                    {allProposals.map(function (d, idx) {
+
+
+                    <div className="flex items-center w-screen min-h-screen">
+                        <div className="container ml-auto mr-auto flex flex-wrap gap-10 items-start">
+
+
+                            {allProposals.map(function (d, idx) {
+
+                                return (
+
+
+
+                                    <div>
+
+                                        <div className="px-4 py-3 w-max bg-white shadow-md rounded-xl duration-500 hover:scale-105  hover:shadow-xl">
+
+                                            <img
+                                                src="https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                                                alt="Product"
+                                                className="h-80 w-72 object-cover rounded-t-xl"
+                                            />
+                                            <div key={idx} className="px-4 py-3 w-72">
+                                                <span className="text-gray-400 mr-3 text-xs">{d.author}</span>
+                                                <p className="text-lg font-semibold text-black truncate">{d.text}</p>
+                                                <div className="flex items-center">
+                                                    <p className="text-sm text-gray-600 cursor-auto ml-2"><b>+</b> {" "} {d.votesYes}  </p>
+                                                    <p className="text-sm text-gray-600 cursor-auto ml-2"><b>-</b> {" "} {d.votesNo}</p>
+                                                </div>
+                                                <p>
+                                                    <button className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-2 py-1 text-center mr-2 mb-2" onClick={() => setVote(d.hash, 0)}>UpVote</button>{"   "}
+                                                    <button className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-2 py-1 text-center mr-2 mb-2" onClick={() => setVote(d.hash, 1)}>DownVote</button>
+                                                </p>
+                                                <p>{d.createdAt.toString()}</p>
+
+                                            </div>
+
+                                        </div>
 
 
 
 
-                        return (
-
-                            <div key={idx}>
-                                <div>{d.author}</div>
-                                {d.createdAt.toString()}
-                                <br />
-                                {d.text}
-                                <br />
-                                {d.votesNo}
-                                <br />
-                                {d.votesYes}
-                                <br />
-                                <button onClick={() => setVote(d.hash, 0)}>UpVote</button>
-                                <button onClick={() => setVote(d.hash, 1)}>DownVote</button>
-                                <br />
-                                <br />
-
-                            </div>
-                        )
+                                    </div>
 
 
 
-                    })}
+                                )
+
+
+                            })}
+                        </div>
+                    </div>
                 </div>
-
-
-
 
 
             </div>
 
-        </div>
+        </div >
 
     );
 
