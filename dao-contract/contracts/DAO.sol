@@ -5,7 +5,6 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "./IERC20.sol";
 
 contract DAO is Ownable {
-
     enum Side {
         YES,
         NO
@@ -25,19 +24,18 @@ contract DAO is Ownable {
         Status status;
     }
 
-
     // proposalHashName to Proposal Struct data type
     mapping(bytes32 => Proposal) public proposals;
 
     bytes32[] public proposalhashlist;
 
     uint256 public noofproposals;
-    
+
     // who voter for who investor-> proposalHashName-> boolean
-    mapping(address =>  mapping(bytes32 => bool)) public votes;
+    mapping(address => mapping(bytes32 => bool)) public votes;
 
     // address of investor to amount
-    mapping(address => uint256 ) public shares;
+    mapping(address => uint256) public shares;
 
     uint256 public totalShares;
 
@@ -48,77 +46,81 @@ contract DAO is Ownable {
 
     uint256 constant VOTING_PERIOD = 7 days;
 
-    constructor(address _token)
-    {
+    constructor(address _token) {
         governanceToken = IERC20(_token);
     }
 
-
-    function deposit(uint256 amount) external
-    {
+    function deposit(uint256 amount) external {
         shares[msg.sender] += amount;
         totalShares += amount;
         governanceToken.transferFrom(msg.sender, address(this), amount);
-
     }
 
-    function withdraw(uint256 amount) external
-    {
+    function withdraw(uint256 amount) external {
         require(shares[msg.sender] >= amount, "not enough shares");
 
         shares[msg.sender] -= amount;
-        
+
         totalShares -= amount;
 
         governanceToken.transfer(msg.sender, amount);
     }
 
-    function createProposal(bytes32 proposalhash) external
-    {
-        require(shares[msg.sender] >= CREATE_PROPOSAL_MIN_SHARE , "not enough shares to create ");
-        require(proposals[proposalhash].proposalnamehash != bytes32(0),"Proposal Already Exits");
+    function createProposal(bytes32 proposalhash) external {
+        require(
+            shares[msg.sender] >= CREATE_PROPOSAL_MIN_SHARE,
+            "not enough shares to create "
+        );
+        require(
+            proposals[proposalhash].proposalnamehash != bytes32(0),
+            "Proposal Already Exits"
+        );
         proposalhashlist.push(proposalhash);
-        noofproposals +=1;
-        proposals[proposalhash] = Proposal(msg.sender, proposalhash, block.timestamp, 0, 0, Status.UNDECIDED  );
-
+        noofproposals += 1;
+        proposals[proposalhash] = Proposal(
+            msg.sender,
+            proposalhash,
+            block.timestamp,
+            0,
+            0,
+            Status.UNDECIDED
+        );
     }
 
-
-    function vote(bytes32 proposalnamehash,Side side ) external
-    {
+    function vote(bytes32 proposalnamehash, Side side) external {
         require(votes[msg.sender][proposalnamehash] == false, "Already Voted");
         Proposal storage proposal = proposals[proposalnamehash];
-        require(proposal.proposalnamehash != bytes32(0), "Proposal Does not exists");
-        require(block.timestamp <= proposal.createdAt + VOTING_PERIOD , "Voting Period Over" );
+        require(
+            proposal.proposalnamehash != bytes32(0),
+            "Proposal Does not exists"
+        );
+        require(
+            block.timestamp <= proposal.createdAt + VOTING_PERIOD,
+            "Voting Period Over"
+        );
 
         votes[msg.sender][proposalnamehash] = true;
 
-
-        if(side == Side.YES)
-        {
-            proposal.votesYes +=   shares[msg.sender];          // the more governance token we have we can vote
+        if (side == Side.YES) {
+            proposal.votesYes += shares[msg.sender]; // the more governance token we have we can vote
 
             // check end of votes i.e total share has been done
 
-            if(proposal.votesYes * 100 / totalShares  > 50)                 // votesYes/ totalShares > 0.5
+            if (
+                (proposal.votesYes * 100) / totalShares > 50
+            ) // votesYes/ totalShares > 0.5
             {
-                proposal.status  = Status.APPROVED;
+                proposal.status = Status.APPROVED;
             }
+        } else {
+            proposal.votesNo += shares[msg.sender]; // the more governance token we have we can vote
 
-
-        }
-        else
-        {
-            proposal.votesNo +=   shares[msg.sender];          // the more governance token we have we can vote
-
-            if(proposal.votesNo * 100 / totalShares  > 50)                 // votesYes/ totalShares > 0.5
+            if (
+                (proposal.votesNo * 100) / totalShares > 50
+            ) // votesYes/ totalShares > 0.5
             {
-                proposal.status  = Status.REJECTED;
+                proposal.status = Status.REJECTED;
             }
-
         }
-
     }
-
-
 }
